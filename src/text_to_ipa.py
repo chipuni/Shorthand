@@ -2,8 +2,7 @@
 This is only a rough conversion, because that's all I need for shorthand."""
 
 # To do:
-# 1. Handle suffixes that double their letters, for example getting -> get
-# 2. Handle apostrophes in the middle of a word.
+# Create a test framework. Include contractions, "getting", and "traditionally".
 
 # Not needed for this project:
 # 1. Final "s" pronunciation depends on whether the previous letter was voiced or unvoiced.
@@ -50,7 +49,7 @@ def load_dictionary(filename):
 
 def split_by_word(text):
     """Split the text by \b."""
-    return re.split(r"\b", text)
+    return re.split(r"[^a-zA-Z0-9_']", text)
 
 
 lemmatizer = WordNetLemmatizer()
@@ -61,34 +60,54 @@ def convert_word_to_ipa(word, word_to_ipa, suffix_to_ipa):
     if word in word_to_ipa:
         return word_to_ipa[word], "", ""
 
-    for pos in ["n", "v", "a", "r", "s"]:
-        lemma = lemmatizer.lemmatize(word, pos=pos)
-        if lemma in word_to_ipa:
-            print(f"Found by lemmatizing (type = {pos}): {word} -> {lemma}")
+    lemma = lemmatize(word)
+    if lemma in word_to_ipa:
+        # Find how long there are letters in common; everything after is the suffix.
+        for triple in zip(word, lemma, range(len(word))):
+            first_not_matching = triple[2]
+            if triple[0] != triple[1]:
+                break
+        if word[first_not_matching] == lemma[first_not_matching]:
+            first_not_matching += 1
 
-            # Find how long there are letters in common; everything after is the suffix.
-            for triple in zip(word, lemma, range(len(word))):
-                first_not_matching = triple[2]
-                if triple[0] != triple[1]:
-                    break
+        suffix = word[first_not_matching:]
 
-            if word[first_not_matching] == lemma[first_not_matching]:
-                first_not_matching += 1
+        # Handle suffixes that don't double their letters, for example traditionally
+        if lemma[-1] == suffix[0] and suffix in suffix_to_ipa:
+            return word_to_ipa[lemma] + suffix_to_ipa[suffix][1:], "", ""
 
-            suffix = word[first_not_matching:]
+        # Handle suffixes that double their letters, for example getting
+        if lemma[-1] == suffix[0] and suffix[1:] in suffix_to_ipa:
+            return word_to_ipa[lemma] + suffix_to_ipa[suffix[1:]], "", ""
 
-            if suffix in suffix_to_ipa:
-                return word_to_ipa[lemma] + suffix_to_ipa[suffix], "", ""
+        if suffix in suffix_to_ipa:
+            return word_to_ipa[lemma] + suffix_to_ipa[suffix], "", ""
 
-            return "", "", f"{suffix} ({word}, {lemma})"
+        return "", "", f"{suffix} ({word}, {lemma})"
 
     print(f"NOT found by stemming: {word}")
-
     return "", word, ""
+
+
+def lemmatize(word):
+    "Turns a word into its lemma. Necessary since NLTK doesn't handle ly."
+    for pos in ["n", "v", "a", "r", "s"]:
+        lemma = lemmatizer.lemmatize(word, pos=pos)
+        if lemma != word:
+            return lemma
+
+    # lemmatizer has problems with "ly" words.
+    if word.endswith("ly"):
+        return word[:-2]
+
+    return word
 
 
 if __name__ == "__main__":
     result = main(sys.argv[1])
+
+    print("Text:")
+    print(" ".join(result[0]))
 
     print("The words not in the dictionary are:")
     unknown_words = sorted(list(set(result[1])))
