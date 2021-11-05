@@ -1,30 +1,21 @@
-Certain computer systems (MTS, for one) use a process called paging to increase the effective memory capacities of their machines. To help explain this process we have invented a game that is played by the same rules as those that control the paging process. Understanding the game is easier than understanding the actual paging process, because computers usually are surrounded by an air of confusion and mystery whereas games usually aren't. Part I gives the game rules, Part II gives the corresponding rules for the actual process, and Part III discusses the object of the game and how you can make the paging mechanism work best for your programs.
+PROCESSION of the damned.
 
-The Crating Game
+By the damned, I mean the excluded.
 
-Rules
+We shall have a procession of data that Science has excluded.
 
-    You can have up to eight million things. So can everybody else.
-    Things are kept in crates that hold 4096 things each. Things in the same crate are called cratemates.
-    Crates are stored either in the workshop or the warehouse. The workshop is almost always too small to hold all the crates.
-    There is only one workshop and two warehouses. Everybody shares them.
-    Each thing has its own thing number.
-    What you do with a thing is to zark it. Everybody takes turns zarking.
-    You can zark only your things, not anybody else's.
-    Things can be zarked only when they're in the workshop.
-    Only the Thing King knows whether a thing is in the workshop or in one of the warehouses.
-    The longer a thing goes without being zarked, the grubbier it is said to become.
-    The way you get your things is to ask the Thing King. The Thing King gives out things only in bunches of eight. This is to keep the royal overhead down.
-    The way you zark one of your things is to give its thing number. If you give the number of a thing that happens to be in the workshop, it is zarked immediately. If not, the Thing King finds the grubbiest thing in the workshop, whether it is yours or somebody else's. He packs it off—in its crate, with all its cratemates—to the warehouse. In its place, he puts the crate containing your thing. Your thing then gets zarked, even though the Thing King had to go to some trouble for you. You never know that your thing wasn't in the shop all along.
+Battalions of the accursed, captained by pallid data that I have exhumed, will march. You'll read them—or they'll march. Some of them livid and some of them fiery and some of them rotten.
 
-    Each player's stock of things is numbered in the same range, 1 to 8,000,000. The thing King always knows who owns what thing and whose turn it is, so you can't ever accidentally zark someone else's thing, even if one of your things has the same thing number.
+Some of them are corpses, skeletons, mummies, twitching, tottering, animated by companions that have been damned alive. There are giants that will walk by, though sound asleep. There are things that are theorems and things that are rags: they'll go by like Euclid arm in arm with the spirit of anarchy. Here and there will flit little harlots. Many are clowns. But many are of the highest respectability. Some are assassins. There are pale stenches and gaunt superstitions and mere shadows and lively malices: whims and amiabilities. The naive and the pedantic and the bizarre and the grotesque and the sincere and the insincere, the profound and the puerile.
 
-Notes
+A stab and a laugh and the patiently folded hands of hopeless propriety.
 
-    Traditionally, the Thing King sits at a large, segmented table and is attended to by pages (the so-called table pages) whose job it is to help the King remember where all the things are.
-    One consequence of Rule 13 is that everybody's thing-numbers will be similar from game to game, regardless of the number of players.
-    The Thing King has a few things of his own, some of which move back and forth from the warehouses to the workshop just like anybody else's, but some are just too heavy to move out of the workshop.
-    With the given set of rules, oft-zarked things tend to get kept mostly in the workshop, while little-zarked things stay mostly in one of the warehouses. This is efficient stock control.
-    Sometimes even the warehouses get full. The Thing King then has to start piling things on the dump out back. This makes the game slower because it takes a long time to get things from the dump when they are needed in the workshop. The Thing King follows a rule that minimizes this delay: When the warehouse begins to get too full, the Thing King uses his spare time to move the grubbiest things in the warehouses out to the dump. This means that the most infrequently zarked things will end up in the dump so that the Thing King won't have to get things from the dump very often. This keeps the game from getting too slow when there are a lot of players and a large number of things to store.
+The ultra-respectable, but the condemned, anyway. The aggregate appearance is of dignity and dissoluteness: the aggregate voice is a defiant prayer: but the spirit of the whole is processional.
 
-LONG LIVE THE THING KING!
+The power that has said to all these things that they are damned, is Dogmatic Science.
+
+But they'll march.
+
+The little harlots will caper, and freaks will distract attention, and the clowns will break the rhythm of the whole with their buffooneries—but the solidity of the procession as a whole: the impressiveness of things that pass and pass and pass, and keep on and keep on and keep on coming.
+
+The irresistibleness of things that neither threaten nor jeer nor defy, but arrange themselves in mass-formations that pass and pass and keep on passing.

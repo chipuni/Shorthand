@@ -18,8 +18,8 @@ def main(filename):
     """The main routine, which calls everything else."""
     word_to_ipa = load_dictionary("data/word_to_ipa.csv")
     suffix_to_ipa = load_dictionary("data/suffix_to_ipa.csv")
-    with open(filename) as file:
-        text = file.read()
+    with open(filename) as fileText:
+        text = fileText.read()
 
     split_word = list(
         filter(lambda word: (len(word) > 0 and word.isalpha()), split_by_word(text))
@@ -36,11 +36,11 @@ def main(filename):
 
 
 def load_dictionary(filename):
-    """Get the word_to_ipa dictionary."""
+    """Get a dictionary from a file."""
     word = {}
 
-    with open(filename, newline="") as file:
-        dict_reader = csv.reader(file)
+    with open(filename, newline="") as fileDict:
+        dict_reader = csv.reader(fileDict)
         for row in dict_reader:
             word[row[0]] = row[1]
 
@@ -106,8 +106,8 @@ def lemmatize(word):
 if __name__ == "__main__":
     result = main(sys.argv[1])
 
-    print("Text:")
-    print(" ".join(result[0]))
+    with open(sys.argv[1], "w") as file:
+        file.write(result[0])
 
     print("The words not in the dictionary are:")
     unknown_words = sorted(list(set(result[1])))
