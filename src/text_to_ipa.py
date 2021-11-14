@@ -60,9 +60,13 @@ def convert_word_to_ipa(word, word_to_ipa, suffix_to_ipa):
     if word in word_to_ipa:
         return word_to_ipa[word], "", ""
 
+    if word.capitalize() in word_to_ipa:
+        return word_to_ipa[word.capitalize()], "", ""
+
     lemma = lemmatize(word)
     if lemma in word_to_ipa:
         # Find how long there are letters in common; everything after is the suffix.
+        first_not_matching = ""
         for triple in zip(word, lemma, range(len(word))):
             first_not_matching = triple[2]
             if triple[0] != triple[1]:
@@ -90,7 +94,7 @@ def convert_word_to_ipa(word, word_to_ipa, suffix_to_ipa):
 
 
 def lemmatize(word):
-    "Turns a word into its lemma. Necessary since NLTK doesn't handle ly."
+    """Turns a word into its lemma. Necessary since NLTK doesn't handle ly."""
     for pos in ["n", "v", "a", "r", "s"]:
         lemma = lemmatizer.lemmatize(word, pos=pos)
         if lemma != word:
@@ -106,8 +110,8 @@ def lemmatize(word):
 if __name__ == "__main__":
     result = main(sys.argv[1])
 
-    with open(sys.argv[1], "w") as file:
-        file.write(result[0])
+    with open(sys.argv[2], "w") as file:
+        file.write(' '.join(result[0]))
 
     print("The words not in the dictionary are:")
     unknown_words = sorted(list(set(result[1])))
