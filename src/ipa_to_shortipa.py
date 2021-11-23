@@ -1,6 +1,7 @@
 # Given a source text in IPA, this code returns the simplified form that the shorthand
 # will encode.
 
+import csv
 from text_to_ipa import load_dictionary
 import sys
 
@@ -13,8 +14,16 @@ def main(filename):
     with open(filename) as fileText:
         text = fileText.read()
 
-    return filename
+    result = ""
+
+    for char in list(text):
+        if char in ipa_to_shortipa:
+            result += ipa_to_shortipa[char]
+        else:
+            result += char
+
+    return result
 
 
 if __name__ == "__main__":
-    result = main(sys.argv[1])
+    print(main(sys.argv[1]))

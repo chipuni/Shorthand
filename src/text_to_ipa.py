@@ -42,7 +42,7 @@ def load_dictionary(filename):
     with open(filename, newline="") as fileDict:
         dict_reader = csv.reader(fileDict)
         for row in dict_reader:
-            word[row[0]] = row[1]
+            word[row[0].lower()] = row[1]
 
     return word
 
@@ -59,9 +59,6 @@ def convert_word_to_ipa(word, word_to_ipa, suffix_to_ipa):
     """Convert an individual word to its IPA equivalent."""
     if word in word_to_ipa:
         return word_to_ipa[word], "", ""
-
-    if word.capitalize() in word_to_ipa:
-        return word_to_ipa[word.capitalize()], "", ""
 
     lemma = lemmatize(word)
     if lemma in word_to_ipa:
