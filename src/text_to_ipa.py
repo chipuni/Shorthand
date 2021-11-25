@@ -2,10 +2,12 @@
 This is only a rough conversion, because that's all I need for shorthand."""
 
 # To do:
-# Create a test framework. Include contractions, "getting", and "traditionally".
+# Create a test framework. Include contractions, "getting", and
+# "traditionally".
 
 # Not needed for this project:
-# 1. Final "s" pronunciation depends on whether the previous letter was voiced or unvoiced.
+# 1. Final "s" pronunciation depends on whether the previous letter
+# was voiced or unvoiced.
 
 import csv
 import re
@@ -18,11 +20,14 @@ def main(filename):
     """The main routine, which calls everything else."""
     word_to_ipa = load_dictionary("data/word_to_ipa.csv")
     suffix_to_ipa = load_dictionary("data/suffix_to_ipa.csv")
-    with open(filename) as fileText:
-        text = fileText.read()
+    with open(filename) as file_text:
+        text = file_text.read()
 
     split_word = list(
-        filter(lambda word: (len(word) > 0 and word.isalpha()), split_by_word(text))
+        filter(
+            lambda word: (len(word) > 0 and word.isalpha()),
+            split_by_word(text),
+        )
     )
     split_ipa = list(
         zip(
@@ -39,8 +44,8 @@ def load_dictionary(filename):
     """Get a dictionary from a file."""
     word = {}
 
-    with open(filename, newline="") as fileDict:
-        dict_reader = csv.reader(fileDict)
+    with open(filename, newline="") as file_dict:
+        dict_reader = csv.reader(file_dict)
         for row in dict_reader:
             word[row[0].lower()] = row[1]
 
@@ -62,7 +67,8 @@ def convert_word_to_ipa(word, word_to_ipa, suffix_to_ipa):
 
     lemma = lemmatize(word)
     if lemma in word_to_ipa:
-        # Find how long there are letters in common; everything after is the suffix.
+        # Find how long there are letters in common; everything after is
+        # the suffix.
         first_not_matching = ""
         for triple in zip(word, lemma, range(len(word))):
             first_not_matching = triple[2]
@@ -73,7 +79,8 @@ def convert_word_to_ipa(word, word_to_ipa, suffix_to_ipa):
 
         suffix = word[first_not_matching:]
 
-        # Handle suffixes that don't double their letters, for example traditionally
+        # Handle suffixes that don't double their letters, for example
+        # traditionally
         if lemma[-1] == suffix[0] and suffix in suffix_to_ipa:
             return word_to_ipa[lemma] + suffix_to_ipa[suffix][1:], "", ""
 
@@ -108,7 +115,7 @@ if __name__ == "__main__":
     result = main(sys.argv[1])
 
     with open(sys.argv[2], "w") as file:
-        file.write(' '.join(result[0]))
+        file.write(" ".join(result[0]))
 
     print("The words not in the dictionary are:")
     unknown_words = sorted(list(set(result[1])))

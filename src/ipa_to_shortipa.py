@@ -1,18 +1,25 @@
-# Given a source text in IPA, this code returns the simplified form that the shorthand
-# will encode.
+"""Given a source text in IPA, this code returns the simplified form that
+ the shorthand will encode.
+"""
 
-import csv
-from text_to_ipa import load_dictionary
 import sys
 
-# TODO: REDO THE VOWELS IN ipa_to_shortipa so that each vowel represents a region
-# (even if only vertically), so they make more sense than accident!
+from text_to_ipa import load_dictionary
 
 
-def main(filename):
+def main():
+    """The main routine, which calls everything else."""
+    result = compute(sys.argv[1])
+
+    with open(sys.argv[2], "w") as file:
+        file.write("".join(result))
+
+
+def compute(filename):
+    """Convert, character by character, from ipa to shortipa."""
     ipa_to_shortipa = load_dictionary("data/ipa_to_shortipa.csv")
-    with open(filename) as fileText:
-        text = fileText.read()
+    with open(filename) as file_text:
+        text = file_text.read()
 
     result = ""
 
@@ -26,4 +33,4 @@ def main(filename):
 
 
 if __name__ == "__main__":
-    print(main(sys.argv[1]))
+    main()
