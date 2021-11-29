@@ -75,6 +75,7 @@ class Rune:
     One character or phoneme written down.
     """
     def __init__(self, initial_loop, slope, curve, length, final_loop):
+        # pylint: disable=too-many-arguments
         self.initial_loop = initial_loop
         self.slope = slope
         self.curve = curve
